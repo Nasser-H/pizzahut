@@ -26,7 +26,7 @@ export default function Home() {
     </div>
     <div className='flex justify-start flex-wrap gap-2 md:gap-4 pt-6 bg-slate-100'>
       {matchedCategory?.data.map((item,Index)=>    
-      <div className='w-full sm:w-[44%] md:w-[27%] mx-4  shadow-lg rounded-lg bg-white p-4'>
+      <div key={Index} className='w-full sm:w-[44%] md:w-[27%] mx-4  shadow-lg rounded-lg bg-white p-4'>
         <h1 className='font-medium'>{item.name}</h1>
         <p className='text-sm h-24 text-black/50 mt-4 font-light'>{item.description}</p>
         <picture className='block max-w-[172px] mx-auto relative'>
