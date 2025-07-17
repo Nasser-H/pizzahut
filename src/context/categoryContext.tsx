@@ -7,7 +7,7 @@ type CategoryContextType = {
   setCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
-export let CategoryContext = createContext<CategoryContextType | null>(null);
+export const CategoryContext = createContext<CategoryContextType | null>(null);
 
 export default function CategoryContextProvider({children} : {children:ReactNode}) {
       const [category, setCategory] = useState ('new');
