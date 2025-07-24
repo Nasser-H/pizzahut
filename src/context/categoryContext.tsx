@@ -1,7 +1,6 @@
 'use client'
 import React, { createContext, ReactNode, useState } from 'react'
 
-
 type CategoryContextType = {
   category: string
   setCategory: React.Dispatch<React.SetStateAction<string>>

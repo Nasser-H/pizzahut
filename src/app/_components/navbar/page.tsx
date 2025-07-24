@@ -20,15 +20,16 @@ export default function Navbar() {
         }
         <Link href={'/'}>
           <picture className='block w-14 sm:w-16 md:w-20'>
-            <Image className='w-full' src={Logo} width={90} height={90} alt='pizza hut logo'/>
+            <Image className='w-full' priority src={Logo} width={90} height={90} alt='pizza hut logo'/>
           </picture>
         </Link>
       </div>
 
       <CategorySlider/>
-      <div className='flex items-center gap-x-6'>
-        <button className='border-2 border-main px-2 py-1 rounded-full text-main hover:bg-main hover:text-white transition-all duration-200'>ENGLISH</button>
-        <Link href={''} className='text-second border-2 border-[#6a6e7b1a] px-2 py-1 rounded-full hover:border-second transition-all duration-200'>معلومات غذائية</Link>
+      <div className='flex items-center gap-x-4 ms-4'>
+        {/* <Link href={'/about'} className='border-2 border-main px-2 py-1 rounded-full text-main hover:bg-main hover:text-white transition-all duration-200'>ENGLISH</Link> */}
+        <Link href={'/about'} className='text-second border-2 border-[#6a6e7b1a] px-4 py-1 rounded-full hover:border-second transition-all duration-200'>من نحن</Link>
+        <Link href={'/contact-us'} className='text-second border-2 border-[#6a6e7b1a] px-4 py-1 rounded-full hover:border-second transition-all duration-200'>تواصل معنا</Link>
       </div>
     </div>
     <AnimatePresence mode='wait'>

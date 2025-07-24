@@ -1,15 +1,23 @@
 'use client'
 import Image from 'next/image'
-import React, { useContext } from 'react'
-import { categories } from './links'
+import React, { useContext, useEffect } from 'react'
 import { CategoryContext } from '@/context/categoryContext'
 import { motion } from 'framer-motion'
+import useGetCategories from '../hooks/useGetCategories'
+import { useRouter } from 'next/navigation'
 
 export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.SetStateAction<boolean>>}) {
-
+    const router = useRouter()
     const context = useContext(CategoryContext);
-    if(!context) return null;
+    let {data, isLoading} = useGetCategories();
+    if (!context || isLoading || !data || !Array.isArray(data)) return null;
     const { setCategory } = context;
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+        return () => {
+        document.body.style.overflow = ''
+        }
+    }, []);
   return <>
     <motion.div
         className='bg-[#00000080] absolute inset-0 z-20 lg:hidden'
@@ -30,15 +38,15 @@ export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.
                 <button onClick={()=>setOpenMenu(false)} className='text-2xl size-11 bg-white flex justify-center items-center shadow-lg rounded-xl'><i className="fa-solid fa-xmark"></i></button>
             </div>
             <div className='flex flex-wrap border mt-5'>
-                {categories.map((category,Index)=>
+                {data.map((category,Index)=>
                     <div key={Index} className='w-1/2'>
-                        <div onClick={()=>{setCategory(category.link);setOpenMenu(false);}} className='flex text-right border gap-x-3 p-2 cursor-pointer'>
-                            <picture className='block w-16 rounded-full overflow-hidden'>
-                                <Image className='w-full' src={category.image} width={80} height={80} alt={category.catName}/>
+                        <div onClick={()=>{setCategory(category.link);setOpenMenu(false);router.push('/')}} className='flex text-right border gap-x-3 p-2 cursor-pointer'>
+                            <picture className='block size-16 rounded-full overflow-hidden'>
+                                <Image className='w-full rounded-full' src={category.image} width={80} height={80} alt={category.name}/>
                             </picture>
                             <div className='text-left space-y-2'>
-                                <p className='font-semibold'>{category.count}</p>
-                                <p className='text-black/70'>{category.catName}</p>
+                                <p className='font-semibold'>{category.products_count}</p>
+                                <p className='text-black/70'>{category.name}</p>
                             </div>
                         </div>
                     </div>

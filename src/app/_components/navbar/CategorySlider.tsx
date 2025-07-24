@@ -1,20 +1,22 @@
 'use client'
 import React, { useContext, useState } from 'react'
-import { categories } from './links';
 import Image from 'next/image';
 import { CategoryContext } from '@/context/categoryContext';
+import useGetCategories from '../hooks/useGetCategories';
+import { useRouter } from 'next/navigation';
 
 export default function CategorySlider() {
-
+    const router = useRouter()
+    let {data} = useGetCategories();
+    const context = useContext(CategoryContext);
     const [page, setPage] = useState(0);
+    if (!context || !data || !Array.isArray(data)) return null;
+    const {setCategory} = context;
     const itemsPerPage = 6;
     const startIndex = page * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const hasPrev = page > 0;
-    const hasNext = endIndex < categories.length;
-    const context = useContext(CategoryContext);
-    if(!context) return null;
-    const {setCategory} = context;
+    const hasNext = endIndex < data.length;
     function handelSlider(){
         if(hasNext){
             setPage(prev => prev + 1);
@@ -30,12 +32,12 @@ export default function CategorySlider() {
                 <span className='pb-1'>{hasNext ? '>': hasPrev ? '<' : ''}</span>
             </button>               
             <ul className='flex gap-x-2'>
-                {categories.slice(startIndex, endIndex).map((category, index)=>
-                    <li onClick={()=>setCategory(category.link)} className='cursor-pointer px-2 py-3 rounded-t-2xl hover:bg-main/[.08] group relative' key={index}>
+                {data?.slice(startIndex, endIndex).map((category, index)=>
+                    <li onClick={()=>{setCategory(category.link);router.push('/')}} className='cursor-pointer px-2 py-3 rounded-t-2xl hover:bg-main/[.08] group relative' key={index}>
                         <div className='flex items-center'>
-                            {category.catName}
+                            {category.name}
                             <picture className='block size-8 rounded-full overflow-hidden'>
-                                <Image className='w-full' width={40} height={40} src={category.image} alt={category.catName} />
+                                <Image className='w-full' width={40} height={40} src={category.image} alt={category.name} />
                             </picture>
                         </div>
                         <div className='h-1 absolute bottom-0 bg-main group-hover:block hidden -left-1 -right-1 rounded-t-full'></div>

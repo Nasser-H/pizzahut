@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "./_components/navbar/page";
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import CategoryContextProvider from "@/context/categoryContext";
+import QueryProvider from "./react-query";
+import LoadingProvider from "./_components/loading/loadingProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +37,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <CategoryContextProvider>
-          <Navbar/>
-          {children}
+          <QueryProvider>
+            <LoadingProvider>
+              <Navbar/>
+              {children}
+            </LoadingProvider>
+          </QueryProvider>
         </CategoryContextProvider>
       </body>
     </html>

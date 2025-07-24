@@ -1,7 +1,30 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
+ 
+const config: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+        port: '',
+        pathname: '/eozdq10hr/images/**',
+        search: '',
+      },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/categories',
+        destination: 'http://pizzahutapi.atwebpages.com/categories.php',
+      },
+      {
+        source: '/api/products',
+        destination: 'http://pizzahutapi.atwebpages.com/',
+      },
+    ]
+  },
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
+}
+ 
+export default config
