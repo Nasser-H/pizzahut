@@ -27,7 +27,7 @@ export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.
         exit={{ opacity: 0 }}
     >
         <motion.div 
-            className='custom-scroll bg-[#f7fafe] bottom-0 top-36 left-0 right-0 px-5 md:px-10 py-5 absolute rounded-t-3xl overflow-y-scroll'
+            className='custom-scroll bg-[#f7fafe] bottom-0 top-36 left-0 right-0 px-5 md:px-10 py-5 absolute rounded-t-3xl overflow-y-auto'
             initial={{ opacity:0, y: 100 }}
             animate={{ opacity: 1, y:0 }}
             transition = {{ duration:0.3 }}
