@@ -7,7 +7,7 @@ export default function useGetProducts(category: string) {
         const data = await response.json();
         return data;
     }
-    let response = useQuery({
+    const response = useQuery({
         queryKey: ['Products', category],
         queryFn: getProducts,
         enabled: !!category,

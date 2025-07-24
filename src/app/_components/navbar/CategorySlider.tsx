@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 export default function CategorySlider() {
     const router = useRouter()
-    let {data} = useGetCategories();
+    const {data} = useGetCategories();
     const context = useContext(CategoryContext);
     const [page, setPage] = useState(0);
     if (!context || !data || !Array.isArray(data)) return null;

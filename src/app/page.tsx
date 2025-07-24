@@ -5,18 +5,17 @@ import Image from 'next/image';
 import useGetProducts from './_components/hooks/useGetProducts';
 import Loading from './_components/loading/loading';
 
+type Product = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  img: string;
+};
 export default function Home() {
     const context = useContext(CategoryContext);
-    if(!context) return null;
-    const { category } = context;
-    let {data, isLoading} = useGetProducts(category);
-    type Product = {
-      id: number;
-      name: string;
-      description: string;
-      price: number;
-      img: string;
-    };
+    const category = context?.category || 'new';
+    const {data, isLoading} = useGetProducts(category);
   return <>
   {isLoading? <Loading/>:
     <div dir='rtl' className='px-5 md:px-11 py-5'>
@@ -34,8 +33,8 @@ export default function Home() {
         </picture>
       </div>
       <div className='flex justify-start flex-wrap gap-2 md:gap-4 pt-6 bg-[#fdf5f3]'>
-        {data?.data.map((item: Product,Index: number)=>    
-        <div key={Index} className='w-full sm:w-[44%] md:w-[27%] mx-4  shadow-lg rounded-lg bg-white p-4'>
+        {data?.data.map((item: Product,index: number)=>    
+        <div key={index} className='w-full sm:w-[44%] md:w-[27%] mx-4  shadow-lg rounded-lg bg-white p-4'>
           <h1 className='font-medium'>{item.name}</h1>
           <p className='text-sm h-24 text-black/50 mt-4 font-light'>{item.description}</p>
           <picture className='block max-w-[172px] mx-auto relative'>
@@ -45,7 +44,7 @@ export default function Home() {
               alt={item.name}
               width={100}
               height={100}
-              priority = {Index == 0}
+              priority = {index == 0}
             />
             <p className='text-white absolute bottom-6 -left-4 bg-main px-2 py-1 rounded-s-full'>{item.price}.00EG</p>
           </picture>

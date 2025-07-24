@@ -7,7 +7,7 @@ export default function useGetCategories() {
         const data = await response.json();
         return data;
     }
-    let response = useQuery({
+    const response = useQuery({
         queryKey: ['categories'],
         queryFn: getCategories,
         refetchOnMount: false,

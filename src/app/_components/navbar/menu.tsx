@@ -7,17 +7,17 @@ import useGetCategories from '../hooks/useGetCategories'
 import { useRouter } from 'next/navigation'
 
 export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.SetStateAction<boolean>>}) {
-    const router = useRouter()
-    const context = useContext(CategoryContext);
-    let {data, isLoading} = useGetCategories();
-    if (!context || isLoading || !data || !Array.isArray(data)) return null;
-    const { setCategory } = context;
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         return () => {
         document.body.style.overflow = ''
         }
     }, []);
+    const router = useRouter()
+    const context = useContext(CategoryContext);
+    const {data, isLoading} = useGetCategories();
+    if (!context || isLoading || !data || !Array.isArray(data)) return null;
+    const { setCategory } = context;
   return <>
     <motion.div
         className='bg-[#00000080] absolute inset-0 z-20 lg:hidden'
