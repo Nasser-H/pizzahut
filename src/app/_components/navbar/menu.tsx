@@ -8,9 +8,15 @@ import { useRouter } from 'next/navigation'
 
 export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.SetStateAction<boolean>>}) {
     useEffect(() => {
-        document.body.style.overflow = 'hidden'
+        const html = document.documentElement;
+        const body = document.body;
+        html.style.overflow = 'hidden';
+        body.style.overflow = 'hidden';
+        body.style.position = 'relative'; 
         return () => {
-        document.body.style.overflow = ''
+        html.style.overflow = '';
+        body.style.overflow = '';
+        body.style.position = '';
         }
     }, []);
     const router = useRouter()
