@@ -15,6 +15,7 @@
   scrollbar-width: thin;
   scrollbar-color: #e4002a7c transparent;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 .fix-scroll {
   overflow: hidden;
