@@ -8,9 +8,9 @@ import { useRouter } from 'next/navigation'
 
 export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.SetStateAction<boolean>>}) {
     useEffect(() => {
-        document.body.classList.add('no-scroll');
+        document.body.classList.add('fix-scroll');
         return () => {
-            document.body.classList.remove('no-scroll');
+            document.body.classList.remove('fix-scroll');
         };
     }, []);
     const router = useRouter()
@@ -27,7 +27,7 @@ export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.
         exit={{ opacity: 0 }}
     >
         <motion.div 
-            className='custom-scroll bg-[#f7fafe] bottom-0 top-36 left-0 right-0 px-5 md:px-10 py-5 absolute rounded-t-3xl overflow-y-auto'
+            className='custom-scroll bg-[#f7fafe] bottom-0 top-36 left-0 right-0 px-5 md:px-10 py-5 absolute rounded-t-3xl overflow-y-auto max-h-[calc(100vh_-_9rem)]'
             initial={{ opacity:0, y: 100 }}
             animate={{ opacity: 1, y:0 }}
             transition = {{ duration:0.3 }}

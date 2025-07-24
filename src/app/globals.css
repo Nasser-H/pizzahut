@@ -16,9 +16,8 @@
   scrollbar-color: #e4002a7c transparent;
   -webkit-overflow-scrolling: touch;
 }
-.no-scroll {
-  overflow: hidden !important;
-  position: relative;
-  height: 100vh;
-  touch-action: none;
+.fix-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
