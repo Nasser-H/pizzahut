@@ -8,16 +8,10 @@ import { useRouter } from 'next/navigation'
 
 export default function Menu({ setOpenMenu}: { setOpenMenu:React.Dispatch<React.SetStateAction<boolean>>}) {
     useEffect(() => {
-        const html = document.documentElement;
-        const body = document.body;
-        html.style.overflow = 'hidden';
-        body.style.overflow = 'hidden';
-        body.style.position = 'relative'; 
+        document.body.classList.add('no-scroll');
         return () => {
-        html.style.overflow = '';
-        body.style.overflow = '';
-        body.style.position = '';
-        }
+            document.body.classList.remove('no-scroll');
+        };
     }, []);
     const router = useRouter()
     const context = useContext(CategoryContext);

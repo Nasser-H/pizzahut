@@ -14,4 +14,11 @@
 .custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: #e4002a7c transparent;
+  -webkit-overflow-scrolling: touch;
+}
+.no-scroll {
+  overflow: hidden !important;
+  position: relative;
+  height: 100vh;
+  touch-action: none;
 }
